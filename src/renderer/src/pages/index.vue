@@ -4,14 +4,19 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  window.api.fetch_projects()
+})
+</script>
 
 <style></style>
-<route>
-{
-  name: "Home Page",
-  meta: {
-    requiresAuth: false
-  }
-}
+<route lang="yaml">
+meta:
+  name: الرئيسية
+  layout: default
+  icon: home
+  order: 1
 </route>

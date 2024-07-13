@@ -5,15 +5,12 @@
   </div>
 </template>
 
-<script></script>
-
+<script setup></script>
 <style></style>
-
-<route>
-{
-  name: "about",
-  meta: {
-    requiresAuth: false
-  }
-}
+<route lang="yaml">
+meta:
+  name: من نحن
+  layout: default
+  icon: info
+  order: 2
 </route>

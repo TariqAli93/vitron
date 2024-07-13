@@ -1,9 +1,15 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import vuetify from './plugins/vuetify'
-import router from './routes'
+import { createRouter, createWebHistory } from 'vue-router'
+import { setupLayouts } from 'virtual:generated-layouts'
+import generatedRoutes from '~pages'
 
-const app = createApp(App)
-app.use(vuetify)
-app.use(router)
-app.mount('#app')
+const routes = setupLayouts(generatedRoutes)
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes
+})
+
+createApp(App).use(router).use(vuetify).mount('#app')

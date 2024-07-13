@@ -16,19 +16,6 @@ export default defineConfig({
         '@renderer': resolve('src/renderer/src')
       }
     },
-    plugins: [
-      Vue({
-        include: [/\.vue$/, /\.md$/]
-      }),
-      Pages({
-        extensions: ['vue', 'md'],
-        syncIndex: false
-      }),
-      Layouts({
-        defaultLayout: 'default',
-        layoutsDirs: 'src/renderer/src/layouts',
-        pagesDirs: ['src/renderer/src/pages', 'src/renderer/src/routes']
-      })
-    ]
+    plugins: [Vue(), Pages(), Layouts()]
   }
 })

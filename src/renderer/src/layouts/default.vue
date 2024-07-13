@@ -1,15 +1,20 @@
 <template>
-  <v-layout class="rounded rounded-md">
-    <v-navigation-drawer>
-      <v-list>
-        <v-list-item title="Navigation drawer"></v-list-item>
-      </v-list>
-    </v-navigation-drawer>
+  <div class="default-layout">
+    <v-app>
+      <v-navigation-drawer :mobile="false">
+        <v-list>
+          <v-list-item title="Navigation drawer"></v-list-item>
+        </v-list>
+      </v-navigation-drawer>
 
-    <v-app-bar title="Application bar"></v-app-bar>
+      <v-app-bar title="App bar"></v-app-bar>
 
-    <v-main class="d-flex align-center justify-center" style="min-height: 300px">
-      <router-view></router-view>
-    </v-main>
-  </v-layout>
+      <v-main>
+        <v-container>
+          <h1>Main Content</h1>
+          <router-view />
+        </v-container>
+      </v-main>
+    </v-app>
+  </div>
 </template>

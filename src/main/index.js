@@ -1,19 +1,30 @@
-import { app, shell, BrowserWindow } from 'electron'
+import { app, shell, BrowserWindow, ipcMain, dialog } from 'electron'
+const { initialize, enable } = require('@electron/remote/main')
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
 import icon from '../../resources/icon.png?asset'
 
+let mainWindow
+
+initialize()
+
 function createWindow() {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 900,
+    title: 'Codel',
+    darkTheme: true,
     height: 670,
+    minHeight: 670,
+    minWidth: 900,
     show: false,
-    autoHideMenuBar: true,
+    frame: true,
     ...(process.platform === 'linux' ? { icon } : {}),
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      nodeIntegration: true,
+      enableRemoteModule: true
     }
   })
 
@@ -33,6 +44,8 @@ function createWindow() {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+
+  enable(mainWindow.webContents)
 }
 
 // This method will be called when Electron has finished
@@ -40,7 +53,7 @@ function createWindow() {
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   // Set app user model id for windows
-  electronApp.setAppUserModelId('com.electron')
+  electronApp.setAppUserModelId('com.codel')
 
   // Default open or close DevTools by F12 in development
   // and ignore CommandOrControl + R in production.
